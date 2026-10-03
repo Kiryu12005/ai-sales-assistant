@@ -1,0 +1,162 @@
+[
+    {
+        "id": "tea_001",
+        "active": true,
+        "type": "tea",
+        "category": "herbal",
+        "name": "Wiesenmorgen",
+        "price_eur": 8.90,
+        "description": "Milder Kräutertee mit Erdbeeraroma und frischer Minze. Koffeinfrei und leicht, ein guter Begleiter für den Nachmittag.",
+        "image_url": "/images/placeholder.png",
+        "available": true,
+        "bestseller": true,
+        "bio_certified": true,
+        "new": false,
+
+        "use_cases": ["entspannen", "nachmittags"],
+        "mood_tags": ["frisch", "leicht"],
+        "occasion_tags": ["sommer"],
+        "recipient_tags": ["einsteiger"],
+        "cross_sell_tags": ["tea_004"],
+
+        "attributes": {
+            "caffeine": false,
+            "ingredients": ["Apfelstücke", "Hibiskusblüten", "Zitronengras", "Pfefferminze", "Kamillenblüten", "natürliches Erdbeer-Aroma"],
+            "taste_profile": ["fruchtig", "frisch"],
+            "brewing_time_min": 6,
+            "brewing_time_max": 8,
+            "brewing_time_unit": "min",
+            "temperature": 100,
+            "rating": 4.6,
+            "rating_count": 32
+        }
+    },
+    {
+        "id": "tea_002",
+        "active": true,
+        "type": "tea",
+        "category": "green",
+        "name": "Sencha Zitrone-Ingwer",
+        "price_eur": 9.50,
+        "description": "Grüner Sencha mit Ingwer und Zitronenschalen. Spritzig, leicht scharf und gut für einen wachen Start in den Tag.",
+        "image_url": "/images/placeholder.png",
+        "available": true,
+        "bestseller": false,
+        "bio_certified": true,
+        "new": true,
+
+        "use_cases": ["morgens", "konzentration"],
+        "mood_tags": ["wach", "frisch"],
+        "occasion_tags": ["frühstück"],
+        "recipient_tags": [],
+        "cross_sell_tags": [],
+
+        "attributes": {
+            "caffeine": true,
+            "ingredients": ["Grüner Tee", "Ingwer", "Zitronengras", "Zitronenschalen", "natürliches Zitronen-Aroma"],
+            "taste_profile": ["zitronig", "würzig"],
+            "brewing_time_min": 2,
+            "brewing_time_max": 3,
+            "brewing_time_unit": "min",
+            "temperature": 80,
+            "rating": 4.8,
+            "rating_count": 58
+        }
+    },
+    {
+        "id": "tea_003",
+        "active": true,
+        "type": "tea",
+        "category": "black",
+        "name": "Earl Grey Klassik",
+        "price_eur": 7.90,
+        "description": "Kräftiger Schwarztee mit Bergamotte und Kornblumenblüten. Der Klassiker unter den aromatisierten Schwarztees.",
+        "image_url": "/images/placeholder.png",
+        "available": true,
+        "bestseller": false,
+        "bio_certified": false,
+        "new": false,
+
+        "use_cases": ["nachmittags"],
+        "mood_tags": ["klassisch"],
+        "occasion_tags": ["teatime"],
+        "recipient_tags": ["geschenk"],
+        "cross_sell_tags": ["tea_005"],
+
+        "attributes": {
+            "caffeine": true,
+            "ingredients": ["Schwarzer Tee", "natürliches Bergamotte-Aroma", "Kornblumenblüten"],
+            "taste_profile": ["aromatisch", "kräftig"],
+            "brewing_time_min": 3,
+            "brewing_time_max": 4,
+            "brewing_time_unit": "min",
+            "temperature": 100,
+            "rating": 4.5,
+            "rating_count": 41
+        }
+    },
+    {
+        "id": "tea_004",
+        "active": true,
+        "type": "tea",
+        "category": "fruit",
+        "name": "Sommerbeeren",
+        "price_eur": 8.50,
+        "description": "Fruchtiger Beerentee aus Hibiskus, Brombeere und Himbeere. Warm ein Genuss, gekühlt als Eistee noch besser.",
+        "image_url": "/images/placeholder.png",
+        "available": true,
+        "bestseller": false,
+        "bio_certified": true,
+        "new": false,
+
+        "use_cases": ["eistee", "entspannen"],
+        "mood_tags": ["fruchtig", "erfrischend"],
+        "occasion_tags": ["sommer", "grillabend"],
+        "recipient_tags": ["kinder"],
+        "cross_sell_tags": ["tea_001"],
+
+        "attributes": {
+            "caffeine": false,
+            "ingredients": ["Apfelstücke", "Hibiskusblüten", "Brombeerblätter", "Himbeerstücke", "Hagebuttenschalen", "natürliches Beeren-Aroma"],
+            "taste_profile": ["fruchtig", "säuerlich"],
+            "brewing_time_min": 8,
+            "brewing_time_max": 10,
+            "brewing_time_unit": "min",
+            "temperature": 100,
+            "rating": 4.7,
+            "rating_count": 27
+        }
+    },
+    {
+        "id": "tea_005",
+        "active": true,
+        "type": "tea",
+        "category": "black",
+        "name": "Mandel-Chai",
+        "price_eur": 10.20,
+        "description": "Würziger Chai mit Zimt, Kardamom und gerösteten Mandelstücken. Passt gut zu kalten Tagen und lässt sich mit Milch zubereiten.",
+        "image_url": "/images/placeholder.png",
+        "available": true,
+        "bestseller": false,
+        "bio_certified": true,
+        "new": true,
+
+        "use_cases": ["abends", "aufwärmen"],
+        "mood_tags": ["gemütlich", "würzig"],
+        "occasion_tags": ["winter", "herbst"],
+        "recipient_tags": ["geschenk"],
+        "cross_sell_tags": ["tea_003"],
+
+        "attributes": {
+            "caffeine": true,
+            "ingredients": ["Schwarzer Tee", "Zimtrinde", "Kardamom", "Ingwer", "Nelken", "Mandelstücke"],
+            "taste_profile": ["würzig", "nussig"],
+            "brewing_time_min": 4,
+            "brewing_time_max": 5,
+            "brewing_time_unit": "min",
+            "temperature": 100,
+            "rating": 4.4,
+            "rating_count": 19
+        }
+    }
+]

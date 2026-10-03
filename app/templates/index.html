@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Assistant</title>
+
+    <!-- Google Fonts (kannst du bei Bedarf ändern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --btq-teal: #0e9aa7;
+            --btq-teal-dark: #0b727a;
+            --btq-gold: #f6b500;
+            --btq-beige: #f7f2ea;
+            --btq-bg: #fcfaf6;
+            --btq-text: #222222;
+            --btq-muted: #777777;
+            --radius-lg: 18px;
+            --radius-xl: 26px;
+            --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--btq-bg);
+            color: var(--btq-text);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Top Info Bar */
+        .top-bar {
+            background: var(--btq-teal);
+            color: #ffffff;
+            text-align: center;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* Main Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 14px 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-main {
+            font-family: "Playfair Display", serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--btq-teal-dark);
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--btq-muted);
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .nav a {
+            position: relative;
+            padding-bottom: 3px;
+            color: #333333;
+        }
+
+        .nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--btq-teal);
+            transition: width 0.18s ease-out;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+            font-size: 1.1rem;
+            color: var(--btq-muted);
+        }
+
+        /* Layout */
+        .main {
+            padding: 32px 6vw 40px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr);
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        /* Hero / Text Side */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .hero-tagline {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: var(--btq-muted);
+        }
+
+        .hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--btq-teal-dark);
+        }
+
+        .hero-text {
+            font-size: 0.98rem;
+            color: #555555;
+            max-width: 560px;
+        }
+
+        .hero-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(14, 154, 167, 0.08);
+            color: var(--btq-teal-dark);
+            font-size: 0.8rem;
+        }
+
+        .hero-banner {
+            margin-top: 16px;
+            padding: 14px 16px;
+            background: linear-gradient(115deg, #222222, #444444);
+            border-radius: var(--radius-lg);
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .hero-banner-main {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .hero-banner-main span {
+            color: var(--btq-gold);
+        }
+
+        .hero-banner-sub {
+            font-size: 0.82rem;
+            color: #f4f4f4;
+        }
+
+        .hero-badge {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #333333;
+            font-size: 0.78rem;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        /* Chat Card */
+        .chat-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .chat-card {
+            background: #ffffff;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .chat-header {
+            padding: 16px 18px 13px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .assistant-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--btq-teal), var(--btq-teal-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .chat-header-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .chat-header-status {
+            font-size: 0.78rem;
+            color: var(--btq-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #cccccc;
+        }
+
+        .status-dot.online {
+            background: #1abc9c;
+        }
+
+        .chat-body {
+            padding: 14px 16px 8px;
+            background: linear-gradient(180deg, var(--btq-beige), #ffffff);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            height: 420px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .msg-row {
+            display: flex;
+        }
+
+        .msg-row.user {
+            justify-content: flex-end;
+        }
+
+        .msg-row.assistant {
+            justify-content: flex-start;
+        }
+
+        .msg-bubble {
+            max-width: 80%;
+            border-radius: 16px;
+            padding: 8px 11px;
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+
+        .msg-user {
+            background: var(--btq-teal);
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-assistant {
+            background: #ffffff;
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .msg-meta {
+            font-size: 0.7rem;
+            color: var(--btq-muted);
+            margin-top: 2px;
+        }
+
+        .chat-quick {
+            margin-top: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chip {
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+            transition: background 0.15s ease-out, transform 0.12s ease-out;
+        }
+
+        .chip:hover {
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .chat-input-area {
+            padding: 10px 12px 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 9px 14px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input-row input:focus {
+            border-color: var(--btq-teal);
+            box-shadow: 0 0 0 1px rgba(14, 154, 167, 0.15);
+        }
+
+        .btn-send {
+            border-radius: 999px;
+            border: none;
+            padding: 8px 14px;
+            background: var(--btq-teal);
+            color: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.18s ease-out, transform 0.12s ease-out, box-shadow 0.18s ease-out;
+        }
+
+        .btn-send:hover {
+            background: var(--btq-teal-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(14, 154, 167, 0.25);
+        }
+
+        .btn-send:disabled {
+            background: #d0d0d0;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        .chat-hint {
+            font-size: 0.72rem;
+            color: var(--btq-muted);
+            padding-left: 6px;
+        }
+
+        /* Footer-ish */
+        .footer {
+            padding: 10px 6vw 24px;
+            font-size: 0.78rem;
+            color: var(--btq-muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Scrollbar styling (optional) */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.18);
+            border-radius: 999px;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .header {
+                padding-inline: 4vw;
+            }
+
+            .main {
+                padding-inline: 4vw;
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .chat-wrapper {
+                order: -1; /* Chat kommt über dem Text auf Mobile */
+            }
+
+            .hero-banner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav {
+                display: none; /* Für echtes Projekt später Mobile-Navigation bauen */
+            }
+
+            .header {
+                padding-inline: 16px;
+            }
+
+            .main {
+                padding-inline: 16px;
+            }
+
+            .chat-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        Kostenlose Lieferung ab 40 € (DE)
+    </div>
+
+    <header class="header">
+        <div class="logo">
+            <div class="logo-main">TEE_UNTERNEHMEN</div>
+            <div class="logo-sub">Chiemgauer Tee Manufaktur</div>
+        </div>
+
+        <nav class="nav">
+            <a href="#">Biotee</a>
+            <a href="#">Zubehör</a>
+            <a href="#">Geschenke</a>
+            <a href="#">Bio-Gewürze</a>
+            <a href="#">Rezepte</a>
+        </nav>
+
+        <div class="header-icons">
+            <span>👤</span>
+            <span>❤</span>
+            <span>🛒</span>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Chat on the right -->
+        <section class="chat-wrapper">
+            <div class="chat-card">
+                <div class="chat-header">
+                    <div class="chat-header-left">
+                        <div class="assistant-avatar">BT</div>
+                        <div>
+                            <div class="chat-header-title">Sales Assistant</div>
+                            <div class="chat-header-status">
+                                <span class="status-dot" id="statusDot"></span>
+                                <span id="statusText">Verbindung wird aufgebaut …</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-body">
+                    <div id="chatMessages" class="chat-messages"></div>
+
+                    <div class="chat-quick">
+                        <button class="chip" data-template="Empfiehl mir einen fruchtigen Tee.">
+                            Fruchtige Tees
+                        </button>
+                        <button class="chip" data-template="Ich suche einen beruhigenden Tee zum Einschlafen.">
+                            Schlaf &amp; Ruhe
+                        </button>
+                        <button class="chip" data-template="Welche Tees empfehlen Sie bei Erkältung?">
+                            Erkältung
+                        </button>
+                        <button class="chip" data-template="Zeig mir passende Tees als Geschenk.">
+                            Geschenkideen
+                        </button>
+                        <button class="chip" data-template="Wie teuer ist dieser Tee?">
+                            Preisfrage
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="chat-input-row">
+                        <input
+                            id="userInput"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Frag den Assistant z. B. nach einem Tee für besseren Schlaf …" />
+                        <button id="sendButton" class="btn-send" disabled>
+                            <span>Senden</span>
+                            <span>➤</span>
+                        </button>
+                    </div>
+                    <div class="chat-hint">
+                        Enter zum Senden · Der Assistant nutzt interne Teedaten (RAG), antwortet aber nicht medizinisch.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text / Hero on the left -->
+        <section class="hero">
+            <div>
+                <div class="hero-tagline">Digitaler Teeberater</div>
+                <h1 class="hero-title">
+                    Lass dir von unserem <span>Sales Assistant</span> die passenden Tees empfehlen.
+                </h1>
+            </div>
+
+            <p class="hero-text">
+                Der Sales Assistant hilft Kundinnen und Kunden, schnell den richtigen Tee zu finden – egal ob
+                fruchtig, beruhigend, für Sport oder als Geschenk. Er kombiniert Produktdaten, Inhaltsstoffe
+                und Geschmackprofile mit einer natürlichen Konversation.
+            </p>
+
+            <div class="hero-highlight">
+                <div class="pill">Individuelle Tee-Empfehlungen</div>
+                <div class="pill">Produkt- &amp; Preisfragen</div>
+                <div class="pill">Konzipiert für Shop-Integration</div>
+            </div>
+
+            <div class="hero-banner">
+                <div>
+                    <div class="hero-banner-main">
+                        Black Week Feeling: <span>digitale Beratung statt Prospekt</span>
+                    </div>
+                    <div class="hero-banner-sub">
+                        In einer Demo-Umgebung getestet – später direkt im Shop einbindbar, um Conversion
+                        und Warenkorbwert zu steigern.
+                    </div>
+                </div>
+                <div class="hero-badge">
+                    Live-Prototyp<br />
+                    WebSocket · RAG · OpenAI
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>Prototypische Demo-Oberfläche für interne Präsentationen.</span>
+    </footer>
+
+    <script>
+        // ----- WEBSOCKET SETUP -----
+        const statusDot = document.getElementById("statusDot");
+        const statusText = document.getElementById("statusText");
+        const sendButton = document.getElementById("sendButton");
+        const userInput = document.getElementById("userInput");
+        const chatMessages = document.getElementById("chatMessages");
+
+        // eigene Client-ID wie in deinem bisherigen Beispiel
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        const clientId = getRandomInt(1, 1000);
+        const wsUrl = `ws://127.0.0.1:8000/ws/${clientId}`;
+        const socket = new WebSocket(wsUrl);
+        console.log("WebSocket URL:", wsUrl);
+
+        function setStatus(state, message) {
+            if (state === "online") {
+                statusDot.classList.add("online");
+            } else {
+                statusDot.classList.remove("online");
+            }
+            statusText.textContent = message;
+        }
+
+        function addMessage(text, sender = "assistant") {
+            if (!text) return;
+            const row = document.createElement("div");
+            row.classList.add("msg-row", sender);
+
+            const bubble = document.createElement("div");
+            bubble.classList.add("msg-bubble");
+            bubble.classList.add(sender === "user" ? "msg-user" : "msg-assistant");
+            bubble.textContent = text;
+
+            row.appendChild(bubble);
+            chatMessages.appendChild(row);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Initial System-Nachricht
+        addMessage(
+            "Servus! Erzähl mir kurz, wonach du suchst – Geschmack, Wirkung oder Anlass – und ich schlage dir passende Tees vor."
+        , "assistant");
+
+        socket.addEventListener("open", () => {
+            setStatus("online", "Verbunden · bereit für deine Fragen.");
+            sendButton.disabled = false;
+        });
+
+        socket.addEventListener("close", () => {
+            setStatus("offline", "Verbindung getrennt – bitte Seite neu laden.");
+            sendButton.disabled = true;
+        });
+
+        socket.addEventListener("error", () => {
+            setStatus("offline", "Fehler bei der Verbindung.");
+            sendButton.disabled = true;
+        });
+
+        socket.addEventListener("message", (event) => {
+            addMessage(event.data, "assistant");
+        });
+
+        function sendCurrentMessage() {
+            const text = userInput.value.trim();
+            if (!text || socket.readyState !== WebSocket.OPEN) return;
+
+            addMessage(text, "user");
+            socket.send(text);
+            userInput.value = "";
+            userInput.focus();
+        }
+
+        sendButton.addEventListener("click", sendCurrentMessage);
+
+        userInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendCurrentMessage();
+            }
+        });
+
+        // Quick-Chip Templates
+        document.querySelectorAll(".chip").forEach((chip) => {
+            chip.addEventListener("click", () => {
+                const value = chip.getAttribute("data-template");
+                userInput.value = value;
+                userInput.focus();
+            });
+        });
+    </script>
+</body>
+</html>
